@@ -1,0 +1,488 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'FiraCode Nerd Font', 'JetBrains Mono', monospace;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0a0f;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #06b6d4, #0891b2);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #22d3ee, #06b6d4);
+}
+
+/* Neon Glow Effects */
+.neon-text {
+  text-shadow: 0 0 7px #06b6d4, 0 0 10px #06b6d4, 0 0 21px #06b6d4, 0 0 42px #0891b2, 0 0 82px #0891b2;
+}
+
+.neon-text-subtle {
+  text-shadow: 0 0 4px #06b6d4, 0 0 11px #06b6d4, 0 0 19px #06b6d4;
+}
+
+.neon-box {
+  box-shadow: 0 0 5px #06b6d4, 0 0 10px #06b6d4, 0 0 20px #06b6d4, inset 0 0 5px rgba(6, 182, 212, 0.1);
+}
+
+.neon-box-purple {
+  box-shadow: 0 0 5px #0e7490, 0 0 10px #0e7490, 0 0 20px #0e7490, inset 0 0 5px rgba(14, 116, 144, 0.1);
+}
+
+.neon-border {
+  border: 1px solid rgba(6, 182, 212, 0.3);
+  box-shadow: 0 0 5px rgba(6, 182, 212, 0.2), inset 0 0 5px rgba(6, 182, 212, 0.05);
+}
+
+.neon-border:hover {
+  border-color: rgba(6, 182, 212, 0.6);
+  box-shadow: 0 0 10px rgba(6, 182, 212, 0.4), 0 0 20px rgba(6, 182, 212, 0.2), inset 0 0 10px rgba(6, 182, 212, 0.1);
+}
+
+/* Glass Morphism */
+.glass {
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.glass-light {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Button Styles */
+.btn-neon {
+  position: relative;
+  padding: 12px 32px;
+  background: transparent;
+  border: 2px solid #06b6d4;
+  color: #06b6d4;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-neon::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(6, 182, 212, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.btn-neon:hover::before {
+  left: 100%;
+}
+
+.btn-neon:hover {
+  background: rgba(6, 182, 212, 0.1);
+  box-shadow: 0 0 10px #06b6d4, 0 0 20px #06b6d4, 0 0 40px #06b6d4;
+  transform: translateY(-2px);
+}
+
+.btn-neon-filled {
+  position: relative;
+  padding: 12px 32px;
+  background: linear-gradient(135deg, #0e7490, #06b6d4);
+  border: none;
+  color: #020617;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  overflow: hidden;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-neon-filled:hover {
+  box-shadow: 0 0 15px rgba(0, 245, 160, 0.5), 0 0 30px rgba(74, 29, 150, 0.3);
+  transform: translateY(-2px);
+  filter: brightness(1.1);
+}
+
+/* Loading Screen */
+.loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #020617;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.loading-screen.fade-out {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.loading-hello {
+  font-size: 4rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #0e7490, #06b6d4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: pulseNeon 1s ease-in-out infinite;
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading-bar {
+  width: 200px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  margin-top: 30px;
+  overflow: hidden;
+}
+
+.loading-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #0e7490, #06b6d4);
+  border-radius: 2px;
+  animation: progress 3s ease-in-out forwards;
+}
+
+/* Cursor Follower */
+.cursor-dot {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  background: #06b6d4;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 10000;
+  transition: transform 0.15s ease, width 0.15s ease, height 0.15s ease, opacity 0.15s ease;
+  box-shadow: 0 0 10px #06b6d4, 0 0 20px #06b6d4, 0 0 30px rgba(6, 182, 212, 0.5);
+  mix-blend-mode: screen;
+}
+
+.cursor-dot.hover {
+  width: 40px;
+  height: 40px;
+  background: rgba(6, 182, 212, 0.2);
+  border: 2px solid #06b6d4;
+}
+
+.cursor-ring {
+  position: fixed;
+  width: 30px;
+  height: 30px;
+  border: 1px solid rgba(6, 182, 212, 0.4);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transition: transform 0.08s ease, width 0.15s ease, height 0.15s ease;
+}
+
+.cursor-ring.hover {
+  width: 60px;
+  height: 60px;
+  border-color: rgba(6, 182, 212, 0.6);
+}
+
+/* Floating Elements */
+.floating-shape {
+  position: absolute;
+  opacity: 0.1;
+  animation: float 6s ease-in-out infinite;
+}
+
+.floating-code {
+  font-family: 'FiraCode Nerd Font', 'JetBrains Mono', monospace;
+  color: #06b6d4;
+  opacity: 0.15;
+  font-size: 14px;
+  animation: float 8s ease-in-out infinite;
+  white-space: nowrap;
+}
+
+/* Gradient Backgrounds */
+.gradient-bg {
+  background: linear-gradient(135deg, #020617 0%, #0f172a 50%, #020617 100%);
+}
+
+.gradient-mint {
+  background: linear-gradient(135deg, #0e7490, #06b6d4);
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #06b6d4, #22d3ee, #0e7490);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Section Styles */
+.section {
+  padding: 80px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .section {
+    padding: 120px 0;
+  }
+}
+
+.section-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  background: linear-gradient(135deg, #06b6d4, #0e7490);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Card Styles */
+.card {
+  background: rgba(15, 23, 42, 0.5);
+  border: 1px solid rgba(6, 182, 212, 0.1);
+  border-radius: 16px;
+  padding: 24px;
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  border-color: rgba(6, 182, 212, 0.3);
+  box-shadow: 0 0 20px rgba(6, 182, 212, 0.1), 0 10px 40px rgba(0, 0, 0, 0.3);
+  transform: translateY(-5px);
+}
+
+/* Skill Progress Bar */
+.skill-bar {
+  width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.skill-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #0e7490, #06b6d4);
+  border-radius: 2px;
+  transition: width 1s ease-out;
+}
+
+/* Input Styles */
+.input-field {
+  width: 100%;
+  padding: 12px 16px;
+  background: rgba(15, 23, 42, 0.5);
+  border: 1px solid rgba(6, 182, 212, 0.2);
+  border-radius: 8px;
+  color: white;
+  font-family: 'FiraCode Nerd Font', monospace;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.input-field:focus {
+  border-color: #06b6d4;
+  box-shadow: 0 0 10px rgba(6, 182, 212, 0.2);
+}
+
+.input-field::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+/* Light Mode Overrides */
+.light .card {
+  background: rgba(255, 255, 255, 0.8);
+  border-color: rgba(14, 116, 144, 0.1);
+}
+
+.light .card:hover {
+  border-color: rgba(14, 116, 144, 0.3);
+  box-shadow: 0 0 20px rgba(14, 116, 144, 0.1), 0 10px 40px rgba(0, 0, 0, 0.1);
+}
+
+.light .glass {
+  background: rgba(255, 255, 255, 0.8);
+  border-color: rgba(0, 0, 0, 0.05);
+}
+
+.light .input-field {
+  background: rgba(255, 255, 255, 0.8);
+  border-color: rgba(14, 116, 144, 0.2);
+  color: #0f172a;
+}
+
+.light .input-field:focus {
+  border-color: #0e7490;
+  box-shadow: 0 0 10px rgba(14, 116, 144, 0.2);
+}
+
+.light .input-field::placeholder {
+  color: rgba(0, 0, 0, 0.4);
+}
+
+.light .cursor-dot {
+  background: #0e7490;
+  box-shadow: 0 0 10px #0e7490, 0 0 20px #0e7490;
+}
+
+.light .cursor-dot.hover {
+  background: rgba(14, 116, 144, 0.2);
+  border-color: #0e7490;
+}
+
+.light .cursor-ring {
+  border-color: rgba(14, 116, 144, 0.4);
+}
+
+.light .loading-hello {
+  animation-name: pulseNeon;
+}
+
+/* Visibility Utilities */
+@keyframes visibility {
+  from { visibility: hidden; }
+  to { visibility: visible; }
+}
+
+/* Intersection Observer Animations */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-50px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(50px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal-right.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.85);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal-scale.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.reveal-fade {
+  opacity: 0;
+  filter: blur(8px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), filter 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal-fade.visible {
+  opacity: 1;
+  filter: blur(0);
+}
+
+/* Stagger children animations */
+.stagger-children .reveal,
+.stagger-children .reveal-left,
+.stagger-children .reveal-right,
+.stagger-children .reveal-scale {
+  opacity: 0;
+}
+
+.stagger-children.visible .reveal,
+.stagger-children.visible .reveal-left,
+.stagger-children.visible .reveal-right,
+.stagger-children.visible .reveal-scale {
+  opacity: 1;
+}
+
+/* Progress bar animation */
+.skill-bar-fill {
+  width: 0;
+  transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal.visible .skill-bar-fill,
+.visible .skill-bar-fill {
+  width: var(--skill-width, 80%);
+}
+
+/* Mobile Responsive */
+@media (max-width: 640px) {
+  .loading-hello {
+    font-size: 2.5rem;
+  }
+
+  .section-title {
+    font-size: 2rem;
+  }
+
+  .cursor-dot,
+  .cursor-ring {
+    display: none;
+  }
+}
